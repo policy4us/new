@@ -1,4 +1,22 @@
+import  { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import maleicon from './assets/male-icon.png';
+import femaleicon from './assets/female-icon.png';
 const Initial = () => {
+    const [gender, setGender] = useState('');
+useEffect(() => {
+    const storedGender = localStorage.getItem('gender');
+    if (storedGender) {
+            setGender(storedGender);
+        }
+  },[])
+  useEffect(()=> {
+    localStorage.setItem('gender', gender);
+  },[gender])
+  const handleGenderChange = (event) => {
+    const selectedGender = event.target.value;
+    setGender(selectedGender);
+  };
   return (
 <div className='flx'>
       <h2>Step 1: Select Gender</h2>
@@ -39,7 +57,7 @@ const Initial = () => {
   </label>
 </div>
           </div>
-          <button className='btn btn-danger mt-5' onClick={handleNext}>GET STARTED</button>
+          <Link to="/display"><button className='btn btn-danger mt-5'>GET STARTED</button></Link>
       </div>
     </div>
     
