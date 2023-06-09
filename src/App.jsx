@@ -5,6 +5,7 @@ import Initial from './Initial'
 import Display from './Display'
 import Age from './Age'
 import {  FormProvider } from './FormContext'
+import Pincode from './Pincode'
 
 function App() {  return (
 
@@ -14,6 +15,7 @@ function App() {  return (
         <Route path="/initial" element={<Initial/>} />
         <Route path="/display" element={<Display/>} />
         <Route path="/age" element={<Age/>} />
+        <Route path="/pincode" element={<Pincode/>}></Route>
       </Routes>
     </FormProvider>
   )

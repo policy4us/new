@@ -90,7 +90,7 @@ const Age = () => {
     </div>
     <div>
           <Link to="/display"><button>Previous</button></Link>
-          <button>Next Step</button>
+          <Link to="/pincode"><button>Next Step</button></Link>
      </div>
     </div>
   )

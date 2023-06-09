@@ -91,3 +91,8 @@ img.selected {
 .special{
   position:absolute;
 }
+.wrap-pin{
+  width:400px;
+  /* height: 400px; */
+  background-color: aquamarine;
+}
