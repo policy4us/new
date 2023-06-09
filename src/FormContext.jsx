@@ -32,7 +32,14 @@ export const FormProvider = ({ children }) => {
     // const [age, setAge] = useState('');
     const [sonCount,setSonCount]=useState(1)
     const [daughterCount, setDaughterCount]=useState(1)
-    const [selectedMembers,setSelectedMembers]=useState([{relation:'',age:'',gender:''}]);
+    const [selectedMembers,setSelectedMembers]=useState([]);
+    // const [genderSelected, setGenderSelected]=useState("");
+    const [youSelected, setYouSelected]=useState(false);
+    const [motherSelected, setMotherSelected]=useState(false);
+    const [fatherSelected, setFatherSelected]=useState(false);
+    const [son1Selected, setSon1Selected]=useState(false);
+    const [daughter1Selected, setDaughter1Selected]=useState(false);
+    const [spouseSelected, setSpouseSelected]=useState(false);
     useEffect(() => {
         const storedGender = localStorage.getItem('gender');
         const storedYou = localStorage.getItem('you');
@@ -62,6 +69,31 @@ export const FormProvider = ({ children }) => {
         const storedDaughterCount=parseInt(localStorage.getItem('daughterCount'));
         const storedSonCount=parseInt(localStorage.getItem('sonCount'));
         const storedMembers = localStorage.getItem('selectedMembers');
+        const storedYouSelected = localStorage.getItem('youSelected');
+        const storedMotherSelected = localStorage.getItem('motherSelected');
+        const storedFatherSelected = localStorage.getItem('fatherSelected');
+        const storedSon1Selected = localStorage.getItem('son1Selected');
+        const storedDaughter1Selected = localStorage.getItem('daughter1Selected');
+        const storedSpouseSelected = localStorage.getItem('spouseSelected');
+        // const storedGenderSelected = localStorage.getItem('genderSelected');
+        if(storedYouSelected){
+            setYouSelected(storedYouSelected);
+        }
+        if(storedSpouseSelected){
+            setSpouseSelected(storedSpouseSelected);
+        }
+        if(storedMotherSelected){
+            setMotherSelected(storedMotherSelected);
+        }
+        if(storedFatherSelected){
+            setFatherSelected(storedFatherSelected);
+        }
+        if(storedSon1Selected){
+            setSon1Selected(storedSon1Selected);
+        }
+        if(storedDaughter1Selected){
+            setDaughter1Selected(storedDaughter1Selected);
+        }
         if (storedGender) {
           setGender(storedGender);
         }
@@ -159,6 +191,21 @@ export const FormProvider = ({ children }) => {
       }, []);
     
       useEffect(() => {
+        // localStorage.setItem('genderSelected', genderSelected);
+        localStorage.setItem('youSelected', youSelected);
+        localStorage.setItem('motherSelected', motherSelected);
+        localStorage.setItem('fatherSelected', fatherSelected);
+        localStorage.setItem('son1Selected', son1Selected);
+        localStorage.setItem('daughter1Selected', daughter1Selected);
+        localStorage.setItem('spouseSelected', spouseSelected);
+        // localStorage.setItem('motherAge', motherAge);
+        // localStorage.setItem('fatherAge', fatherAge);
+        // localStorage.setItem('son1Age', son1Age);
+        // localStorage.setItem('daughter1Age', daughter1Age);
+        // localStorage.setItem('spouseAge', spouseAge);
+        // localStorage.setItem('youAge', youAge);
+        // localStorage.setItem('son2Age', son2Age);
+        // localStorage.setItem('son3Age', son3Age);
         localStorage.setItem('gender', gender);
         localStorage.setItem('you', you);
         localStorage.setItem('mother', mother);
@@ -187,7 +234,7 @@ export const FormProvider = ({ children }) => {
         localStorage.setItem('sonCount', sonCount);
         localStorage.setItem('daughterCount',daughterCount);
         localStorage.setItem('selectedMembers', JSON.stringify(selectedMembers));
-      }, [gender,you,mother,father,son4,son1,son2,son3,daughter4,daughter1,daughter2,daughter3,spouse,motherAge,fatherAge,son4Age,daughter4Age,spouseAge,youAge,son1Age,son2Age,son3Age,daughter1Age,daughter2Age,daughter3Age,sonCount,daughterCount  ,selectedMembers]);
+      }, [gender,you,mother,father,son4,son1,son2,son3,daughter4,daughter1,daughter2,daughter3,spouse,motherAge,fatherAge,son4Age,daughter4Age,spouseAge,youAge,son1Age,son2Age,son3Age,daughter1Age,daughter2Age,daughter3Age,sonCount,daughterCount  ,selectedMembers,youSelected,spouseSelected,motherSelected,fatherSelected,son1Selected,daughter1Selected]);
     
       const handleGenderChange = (event) => {
         const selectedGender = event.target.value;
@@ -196,15 +243,17 @@ export const FormProvider = ({ children }) => {
       };
        const youCheckBoxChange =(event) => {
         const value = event.target.value;
-        const checked = event.target.checked;
+        const checked = event.target.checked || youSelected
         if (checked) {
               setYou(value);
+              setYouSelected(true);
               // setSelectedMembers([...selectedMembers, value]);
               setSelectedMembers((prevMembers)=>[...prevMembers, {relation:'self',age:'',gender:gender}]);
             } else {
               setSelectedMembers((prevMembers)=>
               prevMembers.filter((member) => member.relation!== 'self')
               )
+              setYouSelected(false);
               setYou('');
             }
       }
