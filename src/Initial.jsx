@@ -1,22 +1,12 @@
-import  { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import maleicon from './assets/male-icon.png';
 import femaleicon from './assets/female-icon.png';
+import { FormContext } from './FormContext';
+import { useContext } from 'react';
 const Initial = () => {
-    const [gender, setGender] = useState('');
-useEffect(() => {
-    const storedGender = localStorage.getItem('gender');
-    if (storedGender) {
-            setGender(storedGender);
-        }
-  },[])
-  useEffect(()=> {
-    localStorage.setItem('gender', gender);
-  },[gender])
-  const handleGenderChange = (event) => {
-    const selectedGender = event.target.value;
-    setGender(selectedGender);
-  };
+  const {gender,handleGenderChange} = useContext(FormContext);
+
+
   return (
 <div className='flx'>
       <h2>Step 1: Select Gender</h2>
