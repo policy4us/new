@@ -75,8 +75,11 @@ export const FormProvider = ({ children }) => {
         }
         if (storedFather) {
           setFather(storedFather);
-          setSelectedMembers((prevMembers)=>[...prevMembers, {relation:storedFather,age:'',gender:'male'}])
-        }
+          (prevMembers => [
+            ...prevMembers,
+            { relation: storedFather, age: '', gender: 'male' }
+          ]);
+    }
         if (storedSon1) {
           setSon1(storedSon1);
           setSelectedMembers((prevMembers)=>[...prevMembers, {relation:storedSon1,age:'',gender:'male'}])
@@ -149,8 +152,9 @@ export const FormProvider = ({ children }) => {
        if (storedSonCount) {
         setSonCount(storedSonCount);
        }
-        if (storedMembers) {
-          setSelectedMembers(JSON.parse(storedMembers));
+     if (storedMembers) {
+            const parsedMembers = JSON.parse(storedMembers);
+            setSelectedMembers(parsedMembers);
         }
       }, []);
     
@@ -227,7 +231,8 @@ export const FormProvider = ({ children }) => {
               // setSelectedMembers([...selectedMembers, value]);
               setSelectedMembers((prevMembers)=>[...prevMembers, {relation:value,age:'',gender:'male'}])
               console.log('father selected')
-            } else {
+            }
+             else {
               console.log('father not selected')
               setSelectedMembers((prevMembers)=>prevMembers.filter((member)=>member.relation!== value))
               setFather('');
