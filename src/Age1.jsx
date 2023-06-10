@@ -1,32 +1,35 @@
-import { useContext } from "react"
-import { FormContext } from "./FormContext"
-import { Link } from "react-router-dom";
+import { useContext, useEffect, useState } from 'react';
+import { FormContext } from './FormContext';
+import { Link } from 'react-router-dom';
 
 const Age1 = () => {
-  const {selectedMembers,setSelectedMembers}=useContext(FormContext)
-  const ageRange = {
+  const { selectedMembers, setSelectedMembers } = useContext(FormContext);
+  const [ageRange, setAgeRange] = useState({
     father: { min: 18, max: 100 },
     mother: { min: 18, max: 100 },
     son: { min: 0, max: 30 },
     daughter: { min: 0, max: 30 },
-    daughter1:{ min: 1, max: 30 },
-    daughter2:{ min: 0, max: 30 },
-    daughter3:{ min: 0, max: 30 },
+    daughter1: { min: 1, max: 30 },
+    daughter2: { min: 0, max: 30 },
+    daughter3: { min: 0, max: 30 },
     spouse: { min: 18, max: 100 },
     you: { min: 18, max: 100 },
-  };
-  const formatAge = (relation, age) => {
-    if (relation === 'son' || relation === 'daughter'|| relation === 'daughter1') {
-      if (age < 1) {
-        const months = Math.round(age * 12);
-        return `${months} months`;
-      } else {
-        return `${Math.floor(age)} years`;
-      }
-    } else {
-      return `${Math.floor(age)} years`;
-    }
-  };
+  });
+
+  useEffect(() => {
+    // Update the age options when ageRange changes
+    setSelectedMembers((prevMembers) => {
+      const updatedMembers = prevMembers.map((member) => {
+        if (member.relation === 'son' || member.relation === 'daughter' || member.relation === 'daughter1') {
+          const ageLimits = ageRange[member.relation];
+          const newAge = Math.max(member.age, ageLimits.min);
+          return { ...member, age: newAge };
+        }
+        return member;
+      });
+      return updatedMembers;
+    });
+  }, [ageRange, setSelectedMembers]);
 
   const handleAgeChange = (index, event) => {
     const { value } = event.target;
@@ -50,7 +53,7 @@ const Age1 = () => {
     if (relation === 'son' || relation === 'daughter' || relation === 'daughter1') {
       for (let i = 1; i <= 11; i++) {
         options.push(
-          <option key={i} value={i / 12}>
+          <option key={`${relation}-${i}`} value={i / 12}>
             {i} months
           </option>
         );
@@ -60,7 +63,7 @@ const Age1 = () => {
     if (ageLimits) {
       for (let i = ageLimits.min; i <= ageLimits.max; i++) {
         options.push(
-          <option key={i} value={i}>
+          <option key={`${relation}-${i*100}`} value={i}>
             {i} years
           </option>
         );
@@ -69,32 +72,36 @@ const Age1 = () => {
 
     return options;
   };
-  
+
   return (
     <div>
       <div>
         <h1>Tell us the ages of your family members</h1>
-      {selectedMembers.map((member, index) => (
-        <div key={index}>
-          {member.relation && (
-            <>
-              <span>{member.relation}</span>
-              <select value={member.age} onChange={(e) => handleAgeChange(index, e)}>
-                <option value="">Select Age</option>
-                {renderAgeOptions(member.relation)}
-              </select>
-              {/* <span>Age: {formatAge(member.relation, member.age)}</span> */}
-            </>
-          )}
-        </div>
-      ))}
+        {selectedMembers.map((member, index) => (
+          <div key={index}>
+            {member.relation && (
+              <>
+                <span>{member.relation}</span>
+                <select value={member.age} onChange={(e) => handleAgeChange(index, e)}>
+                  <option value="">Select Age</option>
+                  {renderAgeOptions(member.relation)}
+                </select>
+                {/* <span>Age: {formatAge(member.relation, member.age)}</span> */}
+              </>
+            )}
+          </div>
+        ))}
+      </div>
+      <div>
+        <Link to="/display">
+          <button>Previous</button>
+        </Link>
+        <Link to="/pincode">
+          <button>Next Step</button>
+        </Link>
+      </div>
     </div>
-    <div>
-          <Link to="/display"><button>Previous</button></Link>
-          <Link to="/pincode"><button>Next Step</button></Link>
-     </div>
-    </div>
-  )
-}
+  );
+};
 
-export default Age1
+export default Age1;

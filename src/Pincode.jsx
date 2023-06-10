@@ -1,5 +1,6 @@
 import { useContext } from "react"
 import { FormContext } from "./FormContext"
+import { Link } from "react-router-dom"
 
 const Pincode = () => {
     const {father,mother} = useContext(FormContext)
@@ -13,7 +14,11 @@ const Pincode = () => {
         <label><input type="checkbox"/> Same as mine</label></>:''}
         <label>Where can we reach you</label>
         <input type="text" />
-        <button className="btn btn-danger mt-5 mb-3">Continue</button>
+        <div className="d-flex justify-content-between">
+          <Link to="/age"><button className="btn btn-danger mt-5 mb-3">Previous</button></Link>
+          <Link to="/age"><button className="btn btn-danger mt-5 mb-3">Continue</button></Link>
+        </div>
+       
     </div>
   )
 }

@@ -15,7 +15,7 @@ function App() {  return (
         <Route path="/" element={<Form />} />
         <Route path="/initial" element={<Initial/>} />
         <Route path="/display" element={<Display/>} />
-        <Route path="/age" element={<Age1/>} />
+        <Route path="/age" element={<Age/>} />
         <Route path="/pincode" element={<Pincode/>}></Route>
       </Routes>
     </FormProvider>
