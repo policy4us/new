@@ -105,9 +105,9 @@ const Display = () => {
           </label>
           <div className='special'>
           {son1 && <div className='d-flex align-items-center justify-content-center'>
-            <div className='btn' onClick={sonCountDecrease}>-</div>
+            {sonCount !==1 &&(<div className='btn' onClick={sonCountDecrease}>-</div>)}
             <div>{sonCount}</div>
-            <div className='btn' onClick={sonCountIncrease}>+</div></div>}
+            {daughterCount+sonCount !== 4 &&(<div className='btn' onClick={sonCountIncrease}>+</div>)}</div>}
           </div>
         </div>
    </div>
@@ -127,9 +127,9 @@ const Display = () => {
           </label>
           <div className='special'>
           {daughter1 && <div className='d-flex align-items-center justify-content-center'>
-            <div className='btn' onClick={daughterCountDecrease}>-</div>
+            {daughterCount !==1 &&(<div className='btn' onClick={daughterCountDecrease}>-</div>)}
             <div>{daughterCount}</div>
-            <div className='btn' onClick={daughterCountIncrease} >+</div></div>}
+            {daughterCount+sonCount !== 4 &&(<div className="btn" onClick={daughterCountIncrease} >+</div>)}</div>}
           </div>
         </div>
         <div className="checkbox">

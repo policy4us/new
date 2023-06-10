@@ -4,7 +4,7 @@ export const FormContext = createContext();
 
 export const FormProvider = ({ children }) => {
     const [gender, setGender] = useState('');
-    const [you, setYou] = useState('');
+    const [you, setYou] = useState('you');
     const [mother, setMother] = useState('');
     const [father, setFather] = useState('');
     const [son4, setSon4] = useState(''); 
@@ -32,7 +32,7 @@ export const FormProvider = ({ children }) => {
     // const [age, setAge] = useState('');
     const [sonCount,setSonCount]=useState('')
     const [daughterCount, setDaughterCount]=useState('')
-    const [selectedMembers,setSelectedMembers]=useState([]);
+    const [selectedMembers,setSelectedMembers]=useState([{relation:'self',age:'',gender:'male'}]);
     const [pincode,setPincode]=useState('')
     useEffect(() => {
         const storedPincode=localStorage.getItem('pincode');
