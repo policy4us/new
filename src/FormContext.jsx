@@ -30,9 +30,9 @@ export const FormProvider = ({ children }) => {
     const [daughter2Age,setDaughter2Age]=useState('')
     const [daughter3Age,setDaughter3Age]=useState('')
     // const [age, setAge] = useState('');
-    const [sonCount,setSonCount]=useState(1)
-    const [daughterCount, setDaughterCount]=useState(1)
-    const [selectedMembers,setSelectedMembers]=useState([{relation:'',age:'',gender:''}]);
+    const [sonCount,setSonCount]=useState('')
+    const [daughterCount, setDaughterCount]=useState('')
+    const [selectedMembers,setSelectedMembers]=useState([]);
     const [pincode,setPincode]=useState('')
     useEffect(() => {
         const storedPincode=localStorage.getItem('pincode');
@@ -348,7 +348,7 @@ export const FormProvider = ({ children }) => {
         }
       };
       const daughterCountIncrease = () => {
-        if (sonCount + daughterCount < 5) {
+        if (sonCount + daughterCount < 4) {
           setDaughterCount((prevCount) => {
             const newDaughterCount = prevCount + 1; // Store the updated sonCount in a new variable
       

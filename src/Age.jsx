@@ -73,6 +73,7 @@ const Age = () => {
   return (
     <div>
       <div>
+        <h1>Tell us the ages of your family members</h1>
       {selectedMembers.map((member, index) => (
         <div key={index}>
           {member.relation && (

@@ -91,7 +91,7 @@ const Display = () => {
         }
         <div className="checkbox">
           <input
-            type="checkbox"
+            type="checkbox" disabled={daughterCount===4}
             id="youCheckbox2"
             value="son1"
             checked={son1==='son1'}
@@ -114,7 +114,7 @@ const Display = () => {
    <div className='pt-5'>
         <div className="checkbox">
           <input
-            type="checkbox"
+            type="checkbox" disabled={sonCount===4}
             id="youCheckbox3"
             value="daughter1"
             checked={daughter1==='daughter1'}
