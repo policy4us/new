@@ -17,7 +17,8 @@ const Pincode = () => {
     setPincode,
     samePincode,
     setSamePincode,
-    setContactForm
+    setContactForm,
+    youAge,
   } = useContext(FormContext);
 
 
@@ -45,19 +46,25 @@ const Pincode = () => {
         value={yourName}
         onChange={(e) =>{
            setYourName(e.target.value)
-          setContactForm((prevForm)=>[...prevForm, {fullName:yourName,age:you}])}}
+          setContactForm((prevForm)=>[...prevForm, {fullName:yourName,age:youAge,gender:gender,mobileNumber:mobileNumber,pincode:pincode,fatherPincode:fatherPincode}])}}
       />
       <label>Enter your mobile number</label>
       <input
         type="text"
         value={mobileNumber}
-        onChange={(e) => setMobileNumber(e.target.value)}
-      />
+        onChange={(e) => {
+          setMobileNumber(e.target.value)
+          setContactForm((prevForm)=>[...prevForm, {fullName:yourName,age:youAge,gender:gender,mobileNumber:mobileNumber,pincode:pincode,fatherPincode:fatherPincode}])}
+        } />
       <label>Where do you live?</label>
       <input
         type="text"
         value={pincode}
-        onChange={(e) => setPincode(e.target.value)}
+        onChange={(e) => {
+          setPincode(e.target.value)
+          setContactForm((prevForm)=>[...prevForm, {fullName:yourName,age:youAge,gender:gender,mobileNumber:mobileNumber,pincode:pincode,fatherPincode:fatherPincode}])
+        }
+        }
       />
 
       {(father || mother) && (
