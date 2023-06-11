@@ -3,7 +3,7 @@ import { FormContext } from "./FormContext"
 import { Link } from "react-router-dom";
 
 const Age = () => {
-  const{selectedMembers,setSelectedMembers,setFatherAge,setMotherAge,setSpouseAge,setSon1Age,setSon2Age,setSon3Age,setSon4Age,setDaughter1Age,setDaughter2Age,setDaughter3Age,setDaughter4Age}=useContext(FormContext)
+  const{selectedMembers,setSelectedMembers,setFatherAge,setMotherAge,setSpouseAge,setSon1Age,setSon2Age,setSon3Age,setSon4Age,setDaughter1Age,setDaughter2Age,setDaughter3Age,setDaughter4Age,setYouAge}=useContext(FormContext)
   const ageRange = {
     father: { min: 18, max: 100 },
     mother: { min: 18, max: 100 },
@@ -97,12 +97,15 @@ const Age = () => {
     }
   
     if (ageLimits) {
-      for (let i = ageLimits.min + 1; i <= ageLimits.max; i++) {
+      for (let i = ageLimits.min; i <= ageLimits.max; i++) {
+        if(i===0){
+          continue;
+        }else{
         options.push(
           <option key={`${i}`} value={i}>
             {i} years
           </option>
-        );
+        );}
       }
     }
   
@@ -118,7 +121,7 @@ const Age = () => {
       <table>
          <tbody>
             <tr key={member}>
-              <td>{member.relation}</td>
+              {member.relation==='self'?<td>you</td>:<td>{member.relation}</td>}
               <td>
               <select value={member.age} onChange={(e) => handleAgeChange(index,e)}>
                   <option value="">Select Age</option>
