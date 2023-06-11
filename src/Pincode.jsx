@@ -16,7 +16,8 @@ const Pincode = () => {
     pincode,
     setPincode,
     samePincode,
-    setSamePincode
+    setSamePincode,
+    setContactForm
   } = useContext(FormContext);
 
 
@@ -42,7 +43,9 @@ const Pincode = () => {
       <input
         type="text"
         value={yourName}
-        onChange={(e) => setYourName(e.target.value)}
+        onChange={(e) =>{
+           setYourName(e.target.value)
+          setContactForm((prevForm)=>[...prevForm, {fullName:yourName,age:you}])}}
       />
       <label>Enter your mobile number</label>
       <input
