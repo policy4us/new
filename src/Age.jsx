@@ -16,7 +16,7 @@ const Age = () => {
     daughter2:{ min: 0, max: 30 },
     daughter3:{ min: 0, max: 30 },
     spouse: { min: 18, max: 100 },
-    you: { min: 18, max: 100 },
+    self: { min: 18, max: 100 },
   };
   const formatAge = (relation, age) => {
     if (relation === 'son1' || relation === 'son2'|| relation === 'daughter1'|| relation === 'daughter2' || relation === 'daughter3' ||relation === 'daughter4' || relation === 'son3' || relation === 'son4') {
@@ -60,7 +60,7 @@ const Age = () => {
       break;
       case'spouse':setSpouseAge(value)
       break;
-      case 'you':setYouAge(value)
+      case 'self':setYouAge(value)
       break;
     }
 
