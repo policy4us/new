@@ -1,6 +1,6 @@
 import { useContext } from "react"
 import { FormContext } from "./FormContext"
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Age = () => {
   const{selectedMembers,setSelectedMembers,setFatherAge,setMotherAge,setSpouseAge,setSon1Age,setSon2Age,setSon3Age,setSon4Age,setDaughter1Age,setDaughter2Age,setDaughter3Age,setDaughter4Age,setYouAge}=useContext(FormContext)
@@ -112,30 +112,38 @@ const Age = () => {
     return options;
   };
   
-  
+  const navigate = useNavigate()
+  const previous=()=>{
+    navigate(-1)
+  }
+  const handleFormSubmit=(e)=>{
+    e.preventDefault();
+  }
   
   return (
     <div>
-      {selectedMembers.map((member,index) =>
-      <>
-      <table>
-         <tbody>
-            <tr key={member}>
-              {member.relation==='self'?<td>you</td>:<td>{member.relation}</td>}
-              <td>
-              <select value={member.age} onChange={(e) => handleAgeChange(index,e)}>
-                  <option value="">Select Age</option>
-                  {renderAgeOptions(member.relation)}</select>
-              </td>
-            </tr>
-         </tbody>
-      </table>
-      </>
-      )}
-      <div>
-          <Link to="/display"><button>Previous</button></Link>
-          <Link to="/pincode"><button>Next Step</button></Link>
-     </div>
+      <form onSubmit={handleFormSubmit}>
+        {selectedMembers.map((member,index) =>
+        <>
+        <table>
+           <tbody>
+              <tr key={member}>
+                {member.relation==='self'?<td>you</td>:<td>{member.relation}</td>}
+                <td>
+                <select value={member.age} onChange={(e) => handleAgeChange(index,e)}>
+                    <option value="">Select Age</option>
+                    {renderAgeOptions(member.relation)}</select>
+                </td>
+              </tr>
+           </tbody>
+        </table>
+        </>
+        )}
+        <div>
+            <button onClick={previous}>Previous</button>
+            <Link to="/pincode"><button type ="submit">Next Step</button></Link>
+       </div>
+      </form>
     </div>
   )
 }
