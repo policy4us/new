@@ -19,6 +19,7 @@ const Pincode = () => {
     setSamePincode,
     setContactForm,
     youAge,
+    gender
   } = useContext(FormContext);
 
 
