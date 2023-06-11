@@ -37,9 +37,14 @@ const Pincode = () => {
       setFatherPincode("");
     }
   };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setContactForm([{fullName:yourName,age:youAge,gender,mobileNumber,pincode,fatherPincode}])
+  }
 
   return (
     <div className="container wrap-pin d-flex flex-column justify-content-center">
+      <form onSubmit={handleSubmit}>
       <h2 className="text-center mb-5 mt-3">Where do you live</h2>
       <label>Enter your full name</label>
       <input
@@ -47,7 +52,7 @@ const Pincode = () => {
         value={yourName}
         onChange={(e) =>{
            setYourName(e.target.value)
-          setContactForm((prevForm)=>[...prevForm, {fullName:yourName,age:youAge,gender:gender,mobileNumber:mobileNumber,pincode:pincode,fatherPincode:fatherPincode}])}}
+         }}
       />
       <label>Enter your mobile number</label>
       <input
@@ -55,7 +60,7 @@ const Pincode = () => {
         value={mobileNumber}
         onChange={(e) => {
           setMobileNumber(e.target.value)
-          setContactForm((prevForm)=>[...prevForm, {fullName:yourName,age:youAge,gender:gender,mobileNumber:mobileNumber,pincode:pincode,fatherPincode:fatherPincode}])}
+          }
         } />
       <label>Where do you live?</label>
       <input
@@ -63,7 +68,6 @@ const Pincode = () => {
         value={pincode}
         onChange={(e) => {
           setPincode(e.target.value)
-          setContactForm((prevForm)=>[...prevForm, {fullName:yourName,age:youAge,gender:gender,mobileNumber:mobileNumber,pincode:pincode,fatherPincode:fatherPincode}])
         }
         }
       />
@@ -90,10 +94,11 @@ const Pincode = () => {
         <Link to="/age">
           <button className="btn btn-danger mt-5 mb-3">Previous</button>
         </Link>
-        <Link to="/age">
-          <button className="btn btn-danger mt-5 mb-3">Continue</button>
-        </Link>
+        
+          <button className="btn btn-danger mt-5 mb-3" type="submit">Continue</button>
+       
       </div>
+      </form>
     </div>
   );
 };
