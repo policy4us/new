@@ -16,6 +16,7 @@ export const FormProvider = ({ children }) => {
     const [daughter2,setDaughter2]=useState('')
     const [daughter3,setDaughter3]=useState('')
     const [spouse, setSpouse] = useState('');
+    const [samePincode, setSamePincode] = useState(false);
     // const [selectedOptions, setSelectedOptions] = useState([]);
   const [motherAge,setMotherAge] = useState('');
     const [fatherAge,setFatherAge] = useState('');
@@ -34,7 +35,12 @@ export const FormProvider = ({ children }) => {
     const [daughterCount, setDaughterCount]=useState('')
     const [selectedMembers,setSelectedMembers]=useState([{relation:'self',age:'',gender:'male'}]);
     const [pincode,setPincode]=useState('')
+    const [mobileNumber,setMobileNumber]=useState('')
+    const [yourName,setYourName]=useState('')
+    const [fatherPincode,setFatherPincode]=useState('')
+    const [contactForm,setContactForm]=useState([]) 
     useEffect(() => {
+        const storedSamePincode=localStorage.getItem('samePincode');
         const storedPincode=localStorage.getItem('pincode');
         const storedGender = localStorage.getItem('gender');
         const storedYou = localStorage.getItem('you');
@@ -64,6 +70,25 @@ export const FormProvider = ({ children }) => {
         const storedDaughterCount=parseInt(localStorage.getItem('daughterCount'));
         const storedSonCount=parseInt(localStorage.getItem('sonCount'));
         const storedMembers = localStorage.getItem('selectedMembers');
+        const storedMobileNumber =localStorage.getItem('mobileNumber');
+        const storedYourName = localStorage.getItem('yourName');
+        const storedFatherPincode = localStorage.getItem('fatherPincode'); 
+        const storedContactForm = localStorage.getItem('contactForm');
+        if(storedSamePincode){
+          setSamePincode(storedSamePincode);
+        }
+        if(storedContactForm){
+          setContactForm(JSON.parse(storedContactForm))
+        }
+        if(storedMobileNumber){
+          setMobileNumber(storedMobileNumber)
+        }
+        if(storedYourName){
+          setYourName(storedYourName)
+        }
+        if(storedFatherPincode){
+          setFatherPincode(storedFatherPincode)
+        }
         if (storedPincode) {
           setPincode(storedPincode);
         }
@@ -164,7 +189,12 @@ export const FormProvider = ({ children }) => {
       }, []);
     
       useEffect(() => {
+        localStorage.setItem('samePincode',samePincode)
+        localStorage.setItem('mobileNumber',mobileNumber);
+        localStorage.setItem('yourName',yourName);
+        localStorage.setItem('fatherPincode',fatherPincode);
         localStorage.setItem('pincode',pincode)
+        localStorage.setItem('contactForm',JSON.stringify(contactForm));
         localStorage.setItem('gender', gender);
         localStorage.setItem('you', you);
         localStorage.setItem('mother', mother);
@@ -193,7 +223,7 @@ export const FormProvider = ({ children }) => {
         localStorage.setItem('sonCount', sonCount);
         localStorage.setItem('daughterCount',daughterCount);
         localStorage.setItem('selectedMembers', JSON.stringify(selectedMembers));
-      }, [gender,you,mother,father,son4,son1,son2,son3,daughter4,daughter1,daughter2,daughter3,spouse,motherAge,fatherAge,son4Age,daughter4Age,spouseAge,youAge,son1Age,son2Age,son3Age,daughter1Age,daughter2Age,daughter3Age,sonCount,daughterCount  ,selectedMembers,pincode]);
+      }, [gender,you,mother,father,son4,son1,son2,son3,daughter4,daughter1,daughter2,daughter3,spouse,motherAge,fatherAge,son4Age,daughter4Age,spouseAge,youAge,son1Age,son2Age,son3Age,daughter1Age,daughter2Age,daughter3Age,sonCount,daughterCount  ,selectedMembers,pincode,mobileNumber,fatherPincode,yourName,contactForm,samePincode]);
     
       const handleGenderChange = (event) => {
         const selectedGender = event.target.value;
@@ -380,7 +410,7 @@ export const FormProvider = ({ children }) => {
   return (
     <FormContext.Provider
       value={{
-        gender,setGender,you,setYou,son1,setSon1,son2,setSon2,son3,setSon3,son4,setSon4,mother,setMother,father,setFather,spouse,setSpouse,daughter1,setDaughter1,daughter2,setDaughter2,daughter3,setDaughter3,daughter4,setDaughter4,selectedMembers,setSelectedMembers,sonCount,setSonCount,daughterCount,setDaughterCount,motherAge,setMotherAge,fatherAge,spouseAge,setSpouseAge,son4Age,daughter4Age,youAge,setYouAge,setSon1Age,setSon2Age,setSon3Age,son1Age,son2Age,son3Age,daughter1Age,setDaughter1Age,daughter2Age,setDaughter2Age,daughter3Age,setDaughter3Age,setFatherAge,setSon4Age,setDaughter4Age,handleGenderChange,daughterCountDecrease,daughterCountIncrease,sonCountIncrease,sonCountDecrease,daughterCheckBoxChange, sonCheckBoxChange,motherCheckBoxChange, fatherCheckBoxChange,youCheckBoxChange,spouseCheckBoxChange
+        gender,setGender,you,setYou,son1,setSon1,son2,setSon2,son3,setSon3,son4,setSon4,mother,setMother,father,setFather,spouse,setSpouse,daughter1,setDaughter1,daughter2,setDaughter2,daughter3,setDaughter3,daughter4,setDaughter4,selectedMembers,setSelectedMembers,sonCount,setSonCount,daughterCount,setDaughterCount,motherAge,setMotherAge,fatherAge,spouseAge,setSpouseAge,son4Age,daughter4Age,youAge,setYouAge,setSon1Age,setSon2Age,setSon3Age,son1Age,son2Age,son3Age,daughter1Age,setDaughter1Age,daughter2Age,setDaughter2Age,daughter3Age,setDaughter3Age,setFatherAge,setSon4Age,setDaughter4Age,handleGenderChange,daughterCountDecrease,daughterCountIncrease,sonCountIncrease,sonCountDecrease,daughterCheckBoxChange, sonCheckBoxChange,motherCheckBoxChange, fatherCheckBoxChange,youCheckBoxChange,spouseCheckBoxChange,contactForm,setContactForm,pincode,setPincode,mobileNumber,setMobileNumber,fatherPincode,setFatherPincode,samePincode,setSamePincode,yourName,setYourName
       }}
     >
       {children}

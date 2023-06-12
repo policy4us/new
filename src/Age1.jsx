@@ -13,14 +13,14 @@ const Age1 = () => {
     daughter2: { min: 0, max: 30 },
     daughter3: { min: 0, max: 30 },
     spouse: { min: 18, max: 100 },
-    you: { min: 18, max: 100 },
+    self: { min: 18, max: 100 },
   });
 
   useEffect(() => {
     // Update the age options when ageRange changes
     setSelectedMembers((prevMembers) => {
       const updatedMembers = prevMembers.map((member) => {
-        if (member.relation === 'son' || member.relation === 'daughter' || member.relation === 'daughter1') {
+        if (member.relation === 'son' || member.relation === 'daughter1' || member.relation === 'daughter1') {
           const ageLimits = ageRange[member.relation];
           const newAge = Math.max(member.age, ageLimits.min);
           return { ...member, age: newAge };
