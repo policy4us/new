@@ -112,12 +112,21 @@ const Age = () => {
     return options;
   };
   
-  const navigate = useNavigate()
-  const previous=()=>{
-    navigate(-1)
-  }
+  // const navigate = useNavigate()
+  // const previous=()=>{
+  //   navigate(-1)
+  // }
   const handleFormSubmit=(e)=>{
     e.preventDefault();
+    const newArray = selectedMembers.map(obj => {
+      return {
+        ...obj,
+        relation: obj.relation.replace(/\d+$/, '')
+      };
+    });
+    
+    console.log(newArray);
+
   }
   
   return (
@@ -140,7 +149,7 @@ const Age = () => {
         </>
         )}
         <div>
-            <button onClick={previous}>Previous</button>
+            <Link to="/display"><button >Previous</button></Link>
             <Link to="/pincode"><button type ="submit">Next Step</button></Link>
        </div>
       </form>

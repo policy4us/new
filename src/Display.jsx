@@ -6,14 +6,14 @@ import maleicon from './assets/male-icon.png'
 import femaleicon from './assets/female-icon.png'
 import daughtericon from './assets/daughter-icon.png'
 import sonicon from './assets/son-icon.png'
-import {  useNavigate } from "react-router-dom";
+import {  Link, useNavigate } from "react-router-dom";
 
 const Display = () => {
   const {gender,sonCount,daughterCount,you,father,mother,son1,daughter1,spouse,handleGenderChange,spouseCheckBoxChange,youCheckBoxChange,sonCheckBoxChange,daughterCheckBoxChange,fatherCheckBoxChange,motherCheckBoxChange,sonCountIncrease,daughterCountDecrease,sonCountDecrease,daughterCountIncrease}=useContext(FormContext);
   const navigate=useNavigate()
-  const handlePrevious=()=>{
-    navigate(-1)
-  }
+  // const handlePrevious=()=>{
+  //   navigate(-1)
+  // }
   const handleFormSubmit=(e)=>{
     e.preventDefault()
    navigate('/age')
@@ -171,7 +171,7 @@ const Display = () => {
      </div>
   </div>
        <div>
-            <button onClick={handlePrevious}>Previous</button>
+            <Link to="/initial"><button type="button">Previous</button></Link>
             <button type="submit" >Next Step</button>
        </div>
       </form>
