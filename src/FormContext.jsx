@@ -229,6 +229,7 @@ export const FormProvider = ({ children }) => {
         const selectedGender = event.target.value;
         setGender(selectedGender);
         setSpouse('')
+        setSpouseAge('');
         setSelectedMembers((prevMembers)=>
         prevMembers.filter((member) => member.relation!== 'spouse')
         )
@@ -246,6 +247,7 @@ export const FormProvider = ({ children }) => {
               prevMembers.filter((member) => member.relation!== 'self')
               )
               setYou('');
+              setYouAge('');
             }
       }
       const motherCheckBoxChange =(event) => {
@@ -258,6 +260,7 @@ export const FormProvider = ({ children }) => {
               setSelectedMembers((prevMembers)=>[...prevMembers, {relation:value, age:'',gender:'female'}]);
             } else {
               setMother('');
+              setMotherAge('');
               setSelectedMembers((prevMembers)=>
                         prevMembers.filter((member) => member.relation!== value)
                         )
@@ -276,6 +279,7 @@ export const FormProvider = ({ children }) => {
               console.log('father not selected')
               setSelectedMembers((prevMembers)=>prevMembers.filter((member)=>member.relation!== value))
               setFather('');
+              setFatherAge('');
             }
       }
       const sonCheckBoxChange =(event) => {
@@ -290,6 +294,10 @@ export const FormProvider = ({ children }) => {
     
             } else {
               setSon1('');
+              setSon1Age('')
+              setSon2Age('')
+              setSon3Age('')
+              setSon4Age('')
               console.log('not selected')
               setSelectedMembers((prevMembers) =>
               prevMembers.filter((member) => !member.relation.startsWith('son'))
@@ -307,6 +315,10 @@ export const FormProvider = ({ children }) => {
               console.log('daughter1')
             } else {
               setDaughter1('');
+              setDaughter1Age('')
+              setDaughter2Age('')
+              setDaughter3Age('')
+              setDaughter4Age('')
               setSelectedMembers((prevMembers) =>
               prevMembers.filter((member) => !member.relation.startsWith('daughter'))
             );
@@ -331,6 +343,7 @@ export const FormProvider = ({ children }) => {
             } else {
               setSelectedMembers((prevMembers)=>prevMembers.filter((member)=>member.relation!==value))
               setSpouse('');
+              setSpouseAge('')
             }
       }
      
@@ -345,6 +358,16 @@ export const FormProvider = ({ children }) => {
             const relationsToRemove = [`son${sonCount}`];
             return prevMembers.filter((member) => !relationsToRemove.includes(member.relation));
           });
+          switch(sonCount){
+            case 4:setSon4Age('')
+            break;
+            case 3:setSon3Age('')
+            break;
+            case 2:setSon2Age('')
+            break;
+            case 1:setSon1Age('')
+            break;
+          }
         }
       };
       const sonCountIncrease = () => {
@@ -385,6 +408,16 @@ export const FormProvider = ({ children }) => {
             const relationsToRemove = [`daughter${daughterCount}`];
             return prevMembers.filter((member) => !relationsToRemove.includes(member.relation));
           });
+          switch(daughterCount){
+            case 4:setDaughter4Age('')
+            break;
+            case 3:setDaughter3Age('')
+            break;
+            case 2:setDaughter2Age('')
+            break;
+            case 1:setDaughter1Age('')
+            break;
+          }
         }
       };
       const daughterCountIncrease = () => {

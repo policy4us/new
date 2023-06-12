@@ -40,6 +40,7 @@ const Pincode = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setContactForm([{fullName:yourName,age:youAge,gender,mobileNumber,pincode,fatherPincode}])
+    console.log(contactForm)
   }
 
   return (
