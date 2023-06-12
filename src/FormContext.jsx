@@ -16,7 +16,7 @@ export const FormProvider = ({ children }) => {
     const [daughter2,setDaughter2]=useState('')
     const [daughter3,setDaughter3]=useState('')
     const [spouse, setSpouse] = useState('');
-    const [samePincode, setSamePincode] = useState(false);
+    const [samePincode, setSamePincode] = useState("");
     // const [selectedOptions, setSelectedOptions] = useState([]);
   const [motherAge,setMotherAge] = useState('');
     const [fatherAge,setFatherAge] = useState('');

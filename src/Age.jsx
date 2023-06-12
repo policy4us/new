@@ -112,21 +112,27 @@ const Age = () => {
     return options;
   };
   
-  // const navigate = useNavigate()
+  const navigate = useNavigate()
   // const previous=()=>{
   //   navigate(-1)
   // }
   const handleFormSubmit=(e)=>{
     e.preventDefault();
-    const newArray = selectedMembers.map(obj => {
-      return {
-        ...obj,
-        relation: obj.relation.replace(/\d+$/, '')
-      };
+     navigate('/pincode')
+    
+    const newArr = selectedMembers.map(obj => {
+      let relation = obj.relation;
+      
+      if (relation.startsWith('son')) {
+        relation = 'son';
+      } else if (relation.startsWith('daughter')) {
+        relation = 'daughter';
+      }
+      
+      return { ...obj, relation };
     });
     
-    console.log(newArray);
-
+    console.log(newArr);
   }
   
   return (
@@ -150,7 +156,7 @@ const Age = () => {
         )}
         <div>
             <Link to="/display"><button >Previous</button></Link>
-            <Link to="/pincode"><button type ="submit">Next Step</button></Link>
+           <button type ="submit">Next Step</button>
        </div>
       </form>
     </div>
