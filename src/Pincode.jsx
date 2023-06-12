@@ -16,7 +16,10 @@ const Pincode = () => {
     pincode,
     setPincode,
     samePincode,
-    setSamePincode
+    setSamePincode,
+    setContactForm,
+    youAge,
+    gender
   } = useContext(FormContext);
 
 
@@ -34,27 +37,39 @@ const Pincode = () => {
       setFatherPincode("");
     }
   };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setContactForm([{fullName:yourName,age:youAge,gender,mobileNumber,pincode,fatherPincode}])
+  }
 
   return (
     <div className="container wrap-pin d-flex flex-column justify-content-center">
+      <form onSubmit={handleSubmit}>
       <h2 className="text-center mb-5 mt-3">Where do you live</h2>
       <label>Enter your full name</label>
       <input
         type="text"
         value={yourName}
-        onChange={(e) => setYourName(e.target.value)}
+        onChange={(e) =>{
+           setYourName(e.target.value)
+         }}
       />
       <label>Enter your mobile number</label>
       <input
         type="text"
         value={mobileNumber}
-        onChange={(e) => setMobileNumber(e.target.value)}
-      />
+        onChange={(e) => {
+          setMobileNumber(e.target.value)
+          }
+        } />
       <label>Where do you live?</label>
       <input
         type="text"
         value={pincode}
-        onChange={(e) => setPincode(e.target.value)}
+        onChange={(e) => {
+          setPincode(e.target.value)
+        }
+        }
       />
 
       {(father || mother) && (
@@ -79,10 +94,11 @@ const Pincode = () => {
         <Link to="/age">
           <button className="btn btn-danger mt-5 mb-3">Previous</button>
         </Link>
-        <Link to="/age">
-          <button className="btn btn-danger mt-5 mb-3">Continue</button>
-        </Link>
+        
+          <button className="btn btn-danger mt-5 mb-3" type="submit">Continue</button>
+       
       </div>
+      </form>
     </div>
   );
 };

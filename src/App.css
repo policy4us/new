@@ -96,3 +96,6 @@ img.selected {
   /* height: 400px; */
   background-color: aquamarine;
 }
+.hide {
+  visibility: hidden;
+}
