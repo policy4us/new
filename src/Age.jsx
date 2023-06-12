@@ -63,7 +63,6 @@ const Age = () => {
       case 'self':setYouAge(value)
       break;
     }
-
     if (ageLimits && newAge >= ageLimits.min && newAge <= ageLimits.max) {
       setSelectedMembers((prevMembers) => {
         const updatedMembers = [...prevMembers];
@@ -102,7 +101,7 @@ const Age = () => {
           continue;
         }else{
         options.push(
-          <option key={`${i}`} value={i}>
+          <option key={`${i+45}`} value={i}>
             {i} years
           </option>
         );}
@@ -142,10 +141,10 @@ const Age = () => {
         <>
         <table>
            <tbody>
-              <tr key={member}>
+              <tr key={index}>
                 {member.relation==='self'?<td>you</td>:<td>{member.relation}</td>}
                 <td>
-                <select value={member.age} onChange={(e) => handleAgeChange(index,e)}>
+                <select value={member.age} onChange={(e) => handleAgeChange(index,e)} required>
                     <option value="">Select Age</option>
                     {renderAgeOptions(member.relation)}</select>
                 </td>

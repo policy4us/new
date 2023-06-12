@@ -7,6 +7,7 @@ import femaleicon from './assets/female-icon.png'
 import daughtericon from './assets/daughter-icon.png'
 import sonicon from './assets/son-icon.png'
 import {  Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 const Display = () => {
   const {gender,sonCount,daughterCount,you,father,mother,son1,daughter1,spouse,handleGenderChange,spouseCheckBoxChange,youCheckBoxChange,sonCheckBoxChange,daughterCheckBoxChange,fatherCheckBoxChange,motherCheckBoxChange,sonCountIncrease,daughterCountDecrease,sonCountDecrease,daughterCountIncrease}=useContext(FormContext);
@@ -14,9 +15,14 @@ const Display = () => {
   // const handlePrevious=()=>{
   //   navigate(-1)
   // }
+  const [warning, setWarning] = useState(false)
   const handleFormSubmit=(e)=>{
     e.preventDefault()
-   navigate('/age')
+    if(you || spouse || son1 || daughter1 || mother || father){
+   navigate('/age')}
+   else{
+    setWarning(true)
+   }
  }
    
   return (
@@ -170,6 +176,7 @@ const Display = () => {
           </div>
      </div>
   </div>
+  {warning&&<span className="text-danger">Select any of the inputs for proceed</span>}
        <div>
             <Link to="/initial"><button type="button">Previous</button></Link>
             <button type="submit" >Next Step</button>

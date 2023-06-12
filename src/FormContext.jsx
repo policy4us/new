@@ -3,7 +3,7 @@ import  { createContext, useEffect, useState } from 'react';
 export const FormContext = createContext();
 
 export const FormProvider = ({ children }) => {
-    const [gender, setGender] = useState('');
+    const [gender, setGender] = useState('male');
     const [you, setYou] = useState('you');
     const [mother, setMother] = useState('');
     const [father, setFather] = useState('');
@@ -228,6 +228,10 @@ export const FormProvider = ({ children }) => {
       const handleGenderChange = (event) => {
         const selectedGender = event.target.value;
         setGender(selectedGender);
+        setSpouse('')
+        setSelectedMembers((prevMembers)=>
+        prevMembers.filter((member) => member.relation!== 'spouse')
+        )
         // setSelectedOptions([]);
       };
        const youCheckBoxChange =(event) => {
@@ -312,12 +316,18 @@ export const FormProvider = ({ children }) => {
       const spouseCheckBoxChange =(event) => {
         const value = event.target.value;
         const checked = event.target.checked;
+        let spGender = '';
+        if(gender==='male'){
+           spGender='female';
+        }else if(gender==='female'){
+          spGender='male';
+        }
         if (checked) {
               setSpouse(value);
               console.log('spouse selected')
                   
               // setSelectedMembers([...selectedMembers, value]);
-              setSelectedMembers((prevMembers)=>[...prevMembers, {relation:value,age:'',gender:'male'}])
+              setSelectedMembers((prevMembers)=>[...prevMembers, {relation:value,age:'',gender:spGender}]);
             } else {
               setSelectedMembers((prevMembers)=>prevMembers.filter((member)=>member.relation!==value))
               setSpouse('');
