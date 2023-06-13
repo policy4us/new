@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { FormContext } from "./FormContext";
 import { Link } from "react-router-dom";
 
@@ -34,15 +34,19 @@ const renderAge =()=>
   }
   return options
 }
-if(you){
-  setProposerAge(youAge);
+
+useEffect(() =>{
+if(youAge){
+  setProposerAge(youAge)
 }
+},[youAge,setProposerAge])
+
+
   const handleFatherPincodeChange = (e) => {
     if (!samePincode) {
       setFatherPincode(e.target.value);
     }
   };
-
   const handleSamePincodeChange = (e) => {
     setSamePincode(e.target.checked);
     if (e.target.checked) {
@@ -53,6 +57,7 @@ if(you){
   };
   const handleSubmit = (e) => {
     e.preventDefault();
+
     setContactForm([{fullName:yourName,age:proposerAge,gender,mobileNumber,pincode,fatherPincode}])
     console.log(contactForm)
   }
@@ -96,7 +101,6 @@ if(you){
         </>
 
       )}
-
       {((father || mother) && you) && (
         <>
           <label>Where your parents live</label>
