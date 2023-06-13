@@ -4,6 +4,7 @@ export const FormContext = createContext();
 
 export const FormProvider = ({ children }) => {
     const [gender, setGender] = useState('male');
+    const [proposerAge,setProposerAge] = useState('');
     const [you, setYou] = useState('you');
     const [youGender, setYouGender] = useState('')
     const [mother, setMother] = useState('');
@@ -41,6 +42,7 @@ export const FormProvider = ({ children }) => {
     const [fatherPincode,setFatherPincode]=useState('')
     const [contactForm,setContactForm]=useState([]) 
     useEffect(() => {
+      const storedProposerAge=localStorage.getItem('proposerAge');
         const storedSamePincode=localStorage.getItem('samePincode');
         const storedPincode=localStorage.getItem('pincode');
         const storedGender = localStorage.getItem('gender');
@@ -76,6 +78,9 @@ export const FormProvider = ({ children }) => {
         const storedFatherPincode = localStorage.getItem('fatherPincode'); 
         const storedContactForm = localStorage.getItem('contactForm');
         const storedYouGender = localStorage.getItem('yourGender');
+        if(storedProposerAge){
+          setProposerAge(storedProposerAge);
+        }
         if(storedYouGender){
           setYouGender(storedYouGender);
         }
@@ -194,6 +199,7 @@ export const FormProvider = ({ children }) => {
       }, []);
     
       useEffect(() => {
+        localStorage.setItem('proposerAge',proposerAge);
         localStorage.setItem('youGender',youGender)
         localStorage.setItem('samePincode',samePincode)
         localStorage.setItem('mobileNumber',mobileNumber);
@@ -229,7 +235,7 @@ export const FormProvider = ({ children }) => {
         localStorage.setItem('sonCount', sonCount);
         localStorage.setItem('daughterCount',daughterCount);
         localStorage.setItem('selectedMembers', JSON.stringify(selectedMembers));
-      }, [gender,you,mother,father,son4,son1,son2,son3,daughter4,daughter1,daughter2,daughter3,spouse,motherAge,fatherAge,son4Age,daughter4Age,spouseAge,youAge,son1Age,son2Age,son3Age,daughter1Age,daughter2Age,daughter3Age,sonCount,daughterCount  ,selectedMembers,pincode,mobileNumber,fatherPincode,yourName,contactForm,samePincode,youGender]);
+      }, [gender,you,mother,father,son4,son1,son2,son3,daughter4,daughter1,daughter2,daughter3,spouse,motherAge,fatherAge,son4Age,daughter4Age,spouseAge,youAge,son1Age,son2Age,son3Age,daughter1Age,daughter2Age,daughter3Age,sonCount,daughterCount  ,selectedMembers,pincode,mobileNumber,fatherPincode,yourName,contactForm,samePincode,youGender,proposerAge]);
     
       const handleGenderChange = (event) => {
         const selectedGender = event.target.value;
@@ -237,8 +243,12 @@ export const FormProvider = ({ children }) => {
         setSpouse('')
         setSpouseAge('');
         setSelectedMembers((prevMembers)=>
-        prevMembers.filter((member) => member.relation!== 'spouse')
-        )
+        prevMembers.filter((member) => member.relation!== 'spouse'))
+        setSelectedMembers(prevMembers =>
+          prevMembers.map(member => ({
+            ...member,
+            gender: member.relation === gender ? gender : selectedGender,
+          })))
         // setSelectedOptions([]);
       };
        const youCheckBoxChange =(event) => {
@@ -459,7 +469,7 @@ export const FormProvider = ({ children }) => {
   return (
     <FormContext.Provider
       value={{
-        gender,setGender,you,setYou,son1,setSon1,son2,setSon2,son3,setSon3,son4,setSon4,mother,setMother,father,setFather,spouse,setSpouse,daughter1,setDaughter1,daughter2,setDaughter2,daughter3,setDaughter3,daughter4,setDaughter4,selectedMembers,setSelectedMembers,sonCount,setSonCount,daughterCount,setDaughterCount,motherAge,setMotherAge,fatherAge,spouseAge,setSpouseAge,son4Age,daughter4Age,youAge,setYouAge,setSon1Age,setSon2Age,setSon3Age,son1Age,son2Age,son3Age,daughter1Age,setDaughter1Age,daughter2Age,setDaughter2Age,daughter3Age,setDaughter3Age,setFatherAge,setSon4Age,setDaughter4Age,handleGenderChange,daughterCountDecrease,daughterCountIncrease,sonCountIncrease,sonCountDecrease,daughterCheckBoxChange, sonCheckBoxChange,motherCheckBoxChange, fatherCheckBoxChange,youCheckBoxChange,spouseCheckBoxChange,contactForm,setContactForm,pincode,setPincode,mobileNumber,setMobileNumber,fatherPincode,setFatherPincode,samePincode,setSamePincode,yourName,setYourName
+        gender,setGender,you,setYou,son1,setSon1,son2,setSon2,son3,setSon3,son4,setSon4,mother,setMother,father,setFather,spouse,setSpouse,daughter1,setDaughter1,daughter2,setDaughter2,daughter3,setDaughter3,daughter4,setDaughter4,selectedMembers,setSelectedMembers,sonCount,setSonCount,daughterCount,setDaughterCount,motherAge,setMotherAge,fatherAge,spouseAge,setSpouseAge,son4Age,daughter4Age,youAge,setYouAge,setSon1Age,setSon2Age,setSon3Age,son1Age,son2Age,son3Age,daughter1Age,setDaughter1Age,daughter2Age,setDaughter2Age,daughter3Age,setDaughter3Age,setFatherAge,setSon4Age,setDaughter4Age,handleGenderChange,daughterCountDecrease,daughterCountIncrease,sonCountIncrease,sonCountDecrease,daughterCheckBoxChange, sonCheckBoxChange,motherCheckBoxChange, fatherCheckBoxChange,youCheckBoxChange,spouseCheckBoxChange,contactForm,setContactForm,pincode,setPincode,mobileNumber,setMobileNumber,fatherPincode,setFatherPincode,samePincode,setSamePincode,yourName,setYourName,proposerAge,setProposerAge
       }}
     >
       {children}

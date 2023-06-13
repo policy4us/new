@@ -19,10 +19,24 @@ const Pincode = () => {
     setSamePincode,
     setContactForm,
     youAge,
-    gender
+    gender,
+    you,
+    proposerAge,
+    setProposerAge
   } = useContext(FormContext);
 
-
+const renderAge =()=>
+{
+  const options = [];
+  for(let i = 18; i <=100;i++){
+    options.push(
+    <option value={i}>{i}years</option>)
+  }
+  return options
+}
+if(you){
+  setProposerAge(youAge);
+}
   const handleFatherPincodeChange = (e) => {
     if (!samePincode) {
       setFatherPincode(e.target.value);
@@ -39,7 +53,7 @@ const Pincode = () => {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    setContactForm([{fullName:yourName,age:youAge,gender,mobileNumber,pincode,fatherPincode}])
+    setContactForm([{fullName:yourName,age:proposerAge,gender,mobileNumber,pincode,fatherPincode}])
     console.log(contactForm)
   }
 
@@ -72,8 +86,18 @@ const Pincode = () => {
         }
         }
       />
+      {!you&&(
+        <>
+        <label>Enter proposer age</label>
+        <select value={proposerAge} onChange={(e) => setProposerAge(e.target.value)}>
+          {proposerAge&&<option value="">Select age</option>}
+          {renderAge()}
+        </select>
+        </>
 
-      {(father || mother) && (
+      )}
+
+      {((father || mother) && you) && (
         <>
           <label>Where your parents live</label>
           <input
