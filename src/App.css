@@ -99,3 +99,8 @@ img.selected {
 .hide {
   visibility: hidden;
 }
+.gid{
+  display: grid;
+  grid-template-columns: 1fr 1 fr 1fr;
+  grid-template-rows: auto;
+}

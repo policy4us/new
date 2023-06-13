@@ -70,7 +70,7 @@ const Display = () => {
               className="checkbox-input"
             />
             <label htmlFor="youCheckbox" className="checkbox-label d-flex flex-column justify-content-center align-items-center">
-              <img src={maleicon} alt="You" className="checkbox-image" />
+              <img src={gender==='male'?maleicon:femaleicon} alt="You" className="checkbox-image" />
               You
             </label>
           </div>

@@ -5,6 +5,7 @@ export const FormContext = createContext();
 export const FormProvider = ({ children }) => {
     const [gender, setGender] = useState('male');
     const [you, setYou] = useState('you');
+    const [youGender, setYouGender] = useState('')
     const [mother, setMother] = useState('');
     const [father, setFather] = useState('');
     const [son4, setSon4] = useState(''); 
@@ -74,6 +75,10 @@ export const FormProvider = ({ children }) => {
         const storedYourName = localStorage.getItem('yourName');
         const storedFatherPincode = localStorage.getItem('fatherPincode'); 
         const storedContactForm = localStorage.getItem('contactForm');
+        const storedYouGender = localStorage.getItem('yourGender');
+        if(storedYouGender){
+          setYouGender(storedYouGender);
+        }
         if(storedSamePincode){
           setSamePincode(storedSamePincode);
         }
@@ -189,6 +194,7 @@ export const FormProvider = ({ children }) => {
       }, []);
     
       useEffect(() => {
+        localStorage.setItem('youGender',youGender)
         localStorage.setItem('samePincode',samePincode)
         localStorage.setItem('mobileNumber',mobileNumber);
         localStorage.setItem('yourName',yourName);
@@ -223,7 +229,7 @@ export const FormProvider = ({ children }) => {
         localStorage.setItem('sonCount', sonCount);
         localStorage.setItem('daughterCount',daughterCount);
         localStorage.setItem('selectedMembers', JSON.stringify(selectedMembers));
-      }, [gender,you,mother,father,son4,son1,son2,son3,daughter4,daughter1,daughter2,daughter3,spouse,motherAge,fatherAge,son4Age,daughter4Age,spouseAge,youAge,son1Age,son2Age,son3Age,daughter1Age,daughter2Age,daughter3Age,sonCount,daughterCount  ,selectedMembers,pincode,mobileNumber,fatherPincode,yourName,contactForm,samePincode]);
+      }, [gender,you,mother,father,son4,son1,son2,son3,daughter4,daughter1,daughter2,daughter3,spouse,motherAge,fatherAge,son4Age,daughter4Age,spouseAge,youAge,son1Age,son2Age,son3Age,daughter1Age,daughter2Age,daughter3Age,sonCount,daughterCount  ,selectedMembers,pincode,mobileNumber,fatherPincode,yourName,contactForm,samePincode,youGender]);
     
       const handleGenderChange = (event) => {
         const selectedGender = event.target.value;
