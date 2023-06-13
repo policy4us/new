@@ -91,7 +91,7 @@ if(youAge){
         }
         }
       />
-      {!you&&(
+      {!youAge&&(
         <>
         <label>Enter proposer age</label>
         <select value={proposerAge} onChange={(e) => setProposerAge(e.target.value)}>
@@ -101,7 +101,7 @@ if(youAge){
         </>
 
       )}
-      {((father || mother) && you) && (
+      {((father || mother) && youAge) && (
         <>
           <label>Where your parents live</label>
           <input
