@@ -121,7 +121,7 @@ const Display = () => {
             {son1 && <div className='d-flex align-items-center justify-content-center'>
             <div className={`btn ${sonCount === 1 ? 'hide' : ''}`} onClick={sonCountDecrease}>-</div>
               <div>{sonCount}</div>
-              {daughterCount+sonCount !== 4 &&(<div className='btn' onClick={sonCountIncrease}>+</div>)}</div>}
+              {daughterCount+sonCount <= 3 &&(<div className='btn' onClick={sonCountIncrease}>+</div>)}</div>}
             </div>
           </div>
      </div>
@@ -143,7 +143,7 @@ const Display = () => {
             {daughter1 && <div className='d-flex align-items-center justify-content-center'>
               <div className={`btn ${daughterCount === 1 ? 'hide' : ''}`} onClick={daughterCountDecrease}>-</div>
               <div>{daughterCount}</div>
-              {daughterCount+sonCount !== 4 &&(<div className="btn" onClick={daughterCountIncrease} >+</div>)}</div>}
+              {daughterCount+sonCount <= 3 &&(<div className="btn" onClick={daughterCountIncrease} >+</div>)}</div>}
             </div>
           </div>
           <div className="checkbox">
