@@ -115,7 +115,7 @@ export const FormProvider = ({ children }) => {
         }
         if (storedFather) {
           setFather(storedFather);
-          (prevMembers => [
+          setSelectedMembers(prevMembers => [
             ...prevMembers,
             { relation: storedFather, age: '', gender: 'male' }
           ]);
